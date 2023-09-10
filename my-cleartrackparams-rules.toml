@@ -8,7 +8,7 @@ regex = 'https:\/\/(x|twitter)\.com\/[a-zA-Z0-9\-_.]+\/status\/\d+'
 action = 'WEB_VIEW'
 javascript = '''
 document.onUrlPreLoad = (url) => {
-    const previewFixupUrl = originalUrl.replaceAll('//x.com', '//vxtwitter.com').replaceAll('//twitter.com', '//vxtwitter.com');
+    const previewFixupUrl = originalUrl.replaceAll('twitter.com', 'vxtwitter.com').replaceAll('x.com', 'vxtwitter.com');
     return;
     control.completion(
         control.cleanUrlParams(previewFixupUrl, ['p'], false)
