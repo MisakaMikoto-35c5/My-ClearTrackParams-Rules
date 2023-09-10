@@ -1,0 +1,16 @@
+[rule_configuration]
+webview_pre_execute = ''
+common_track_args = [
+]
+
+[[rules]]
+regex = 'https:\/\/(x|twitter)\.com\/[a-zA-Z0-9\-_.]+\/status\/\d+\/?\?([a-zA-Z]+=[0-9a-zA-Z\-_]+&?)+'
+action = 'WEB_VIEW'
+javascript = '''
+document.onUrlPreLoad = (url) => {
+    const previewFixupUrl = originalUrl.replaceAll('x.com', 'vxtwitter.com').replaceAll('twitter.com', 'vxtwitter.com')
+    control.completion(
+        control.cleanUrlParams(previewFixupUrl, ['p'], false)
+    );
+}
+'''
