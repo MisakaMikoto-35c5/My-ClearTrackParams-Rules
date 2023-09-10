@@ -4,12 +4,14 @@ common_track_args = [
 ]
 
 [[rules]]
-regex = 'https:\/\/(x|twitter)\.com\/[a-zA-Z0-9\-_.]+\/status\/\d+'
+regex = '^(https:\/\/)?(twitter|x)\.com\/[a-zA-Z0-9\-_.]+\/status\/\d+'
 action = 'WEB_VIEW'
 javascript = '''
 document.onUrlPreLoad = (url) => {
-    const previewFixupUrl = originalUrl.replaceAll('twitter.com', 'vxtwitter.com').replaceAll('x.com', 'vxtwitter.com');
-    return;
+    var previewFixupUrl = originalUrl
+        .replace('//twitter.com', '//vxtwitter.com')
+        .replace('//x.com', '//vxtwitter.com');
+       console.log(previewFixupUrl);
     control.completion(
         control.cleanUrlParams(previewFixupUrl, ['p'], false)
     );
